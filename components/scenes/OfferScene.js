@@ -1,18 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Truck, BadgeIndianRupee, RefreshCw, Instagram, Zap } from "lucide-react";
+import { Truck, ShieldCheck, RefreshCw, Instagram, Zap } from "lucide-react";
 import Scene from "@/components/experience/Scene";
 import LivingMoon from "@/components/experience/LivingMoon";
 import RevealText from "@/components/experience/RevealText";
 import PulseCTA from "@/components/experience/PulseCTA";
 import Magnetic from "@/components/experience/Magnetic";
 import Countdown from "@/components/ui/Countdown";
+import { useLiveStore } from "@/components/experience/LiveStoreProvider";
 import { whatsappLink, brand, pricing } from "@/lib/config";
 import { formatPrice } from "@/lib/utils";
 import { sceneLines } from "@/lib/experience";
 
 export default function OfferScene() {
+  const { stock } = useLiveStore();
   return (
     <Scene id="offer" className="justify-center pb-28">
       <motion.div
@@ -47,7 +49,7 @@ export default function OfferScene() {
       {/* Scarcity */}
       <RevealText delay={0.2} className="mt-5 w-full max-w-xs">
         <div className="rounded-2xl border border-red-500/25 bg-red-500/5 px-4 py-2.5 text-center text-xs font-medium text-red-300">
-          🔥 Only {pricing.unitsLeft} left at this price
+          🔥 Only {stock} left at this price
         </div>
       </RevealText>
 
@@ -71,7 +73,7 @@ export default function OfferScene() {
       {/* Trust */}
       <RevealText delay={0.25} className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-white/55">
         <span className="inline-flex items-center gap-1.5"><Truck size={14} className="text-gold" /> Free shipping</span>
-        <span className="inline-flex items-center gap-1.5"><BadgeIndianRupee size={14} className="text-gold" /> COD</span>
+        <span className="inline-flex items-center gap-1.5"><ShieldCheck size={14} className="text-gold" /> Secure order</span>
         <span className="inline-flex items-center gap-1.5"><RefreshCw size={14} className="text-gold" /> 7-day replace</span>
       </RevealText>
 

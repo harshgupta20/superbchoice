@@ -24,7 +24,7 @@ export const metadata = {
     template: "%s | superb.choice",
   },
   description:
-    "Own your own moon. A handcrafted 3D Moon Lamp with a warm, dreamy glow, 16 colors and touch control. Loved by 10,000+. Free shipping, Cash on Delivery & 7-day replacement — 50% OFF tonight.",
+    "Own your own moon. A handcrafted 3D Moon Lamp with a warm, dreamy glow, 16 colors and touch control. Loved by 10,000+. Fast free shipping & 7-day replacement — 56% OFF tonight.",
   keywords: [
     "moon lamp",
     "3d moon lamp",
@@ -46,13 +46,13 @@ export const metadata = {
     siteName: "superb.choice",
     title: "Bring The Moon Home 🌙 | superb.choice",
     description:
-      "An immersive Moon Lamp experience. Turn any room into magic — 16 colors, touch control, dreamy glow. 50% OFF tonight + Free Shipping & COD.",
+      "An immersive Moon Lamp experience. Turn any room into magic — 16 colors, touch control, dreamy glow. 56% OFF tonight + Fast Free Shipping.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Bring The Moon Home 🌙 | superb.choice",
     description:
-      "Own your own moon. Loved by 10,000+. 50% OFF tonight + Free Shipping & Cash on Delivery.",
+      "Own your own moon. Loved by 10,000+. 56% OFF tonight + Fast Free Shipping.",
   },
   robots: {
     index: true,

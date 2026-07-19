@@ -2,6 +2,8 @@ import SkyBackdrop from "@/components/experience/SkyBackdrop";
 import Starfield from "@/components/experience/Starfield";
 import StoriesProgress from "@/components/experience/StoriesProgress";
 import StickyBuyBar from "@/components/experience/StickyBuyBar";
+import LiveStoreProvider from "@/components/experience/LiveStoreProvider";
+import PurchasePopup from "@/components/experience/PurchasePopup";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 import HeroScene from "@/components/scenes/HeroScene";
@@ -41,27 +43,30 @@ export default function HomePage() {
     <>
       <ProductLd />
 
-      {/* Atmosphere */}
-      <SkyBackdrop />
-      <Starfield />
-      <StoriesProgress segments={9} />
+      <LiveStoreProvider>
+        {/* Atmosphere */}
+        <SkyBackdrop />
+        <Starfield />
+        <StoriesProgress segments={9} />
 
-      {/* The film — 9 cinematic scenes */}
-      <main className="relative">
-        <HeroScene />
-        <RoomScene />
-        <ColorsScene />
-        <ReadingScene />
-        <SetupScene />
-        <RomanceScene />
-        <GiftScene />
-        <SocialScene />
-        <OfferScene />
-      </main>
+        {/* The film — 9 cinematic scenes */}
+        <main className="relative">
+          <HeroScene />
+          <RoomScene />
+          <ColorsScene />
+          <ReadingScene />
+          <SetupScene />
+          <RomanceScene />
+          <GiftScene />
+          <SocialScene />
+          <OfferScene />
+        </main>
 
-      {/* Persistent conversion */}
-      <StickyBuyBar />
-      <WhatsAppButton />
+        {/* Persistent conversion */}
+        <StickyBuyBar />
+        <WhatsAppButton />
+        <PurchasePopup />
+      </LiveStoreProvider>
     </>
   );
 }

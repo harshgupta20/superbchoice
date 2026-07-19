@@ -5,9 +5,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
 import { whatsappLink, pricing } from "@/lib/config";
 import { formatPrice } from "@/lib/utils";
+import { useLiveStore } from "./LiveStoreProvider";
 
 export default function StickyBuyBar() {
   const [visible, setVisible] = useState(false);
+  const { stock } = useLiveStore();
 
   useEffect(() => {
     const onScroll = () => {
@@ -53,7 +55,7 @@ export default function StickyBuyBar() {
                 <span className="text-[11px] text-white/40 line-through">{formatPrice(pricing.original)}</span>
               </div>
               <span className="text-[9px] font-semibold uppercase tracking-wide text-red-400">
-                {pricing.unitsLeft} left
+                {stock} left
               </span>
             </div>
             <a
