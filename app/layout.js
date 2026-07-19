@@ -20,11 +20,11 @@ const SITE_URL = "https://superbchoice.example";
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "superb.choice — Moon Lamp | Bring the Moon Into Your Room",
+    default: "superb.choice — Bring The Moon Home 🌙",
     template: "%s | superb.choice",
   },
   description:
-    "The viral 3D Moon Lamp loved by 10,000+ customers. Realistic lunar texture, 16 warm-to-cool colors, touch control & rechargeable battery. Free shipping, Cash on Delivery & 7-day replacement. Order today — 50% OFF.",
+    "Own your own moon. A handcrafted 3D Moon Lamp with a warm, dreamy glow, 16 colors and touch control. Loved by 10,000+. Free shipping, Cash on Delivery & 7-day replacement — 50% OFF tonight.",
   keywords: [
     "moon lamp",
     "3d moon lamp",
@@ -44,15 +44,15 @@ export const metadata = {
     locale: "en_IN",
     url: SITE_URL,
     siteName: "superb.choice",
-    title: "Moon Lamp — Bring the Moon Into Your Room | superb.choice",
+    title: "Bring The Moon Home 🌙 | superb.choice",
     description:
-      "Turn any room into an aesthetic, cozy escape. Realistic 3D Moon Lamp with 16 colors & touch control. 50% OFF today + Free Shipping & COD.",
+      "An immersive Moon Lamp experience. Turn any room into magic — 16 colors, touch control, dreamy glow. 50% OFF tonight + Free Shipping & COD.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Moon Lamp — Bring the Moon Into Your Room | superb.choice",
+    title: "Bring The Moon Home 🌙 | superb.choice",
     description:
-      "The viral Moon Lamp loved by 10,000+ customers. 50% OFF today + Free Shipping & Cash on Delivery.",
+      "Own your own moon. Loved by 10,000+. 50% OFF tonight + Free Shipping & Cash on Delivery.",
   },
   robots: {
     index: true,

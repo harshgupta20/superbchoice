@@ -1,41 +1,30 @@
-import AnnouncementBar from "@/components/AnnouncementBar";
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import SocialProof from "@/components/SocialProof";
-import Features from "@/components/Features";
-import Gallery from "@/components/Gallery";
-import ProductShowcase from "@/components/ProductShowcase";
-import VideoSection from "@/components/VideoSection";
-import BeforeAfter from "@/components/BeforeAfter";
-import GiftSection from "@/components/GiftSection";
-import Testimonials from "@/components/Testimonials";
-import InstagramFeed from "@/components/InstagramFeed";
-import FAQ from "@/components/FAQ";
-import TrustSection from "@/components/TrustSection";
-import LimitedOffer from "@/components/LimitedOffer";
-import Pricing from "@/components/Pricing";
-import PurchasePopup from "@/components/PurchasePopup";
+import SkyBackdrop from "@/components/experience/SkyBackdrop";
+import Starfield from "@/components/experience/Starfield";
+import StoriesProgress from "@/components/experience/StoriesProgress";
+import StickyBuyBar from "@/components/experience/StickyBuyBar";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import StickyCTA from "@/components/StickyCTA";
-import Footer from "@/components/Footer";
-import { brand, pricing } from "@/lib/config";
-import { faqs } from "@/lib/data";
 
-// Product + FAQ structured data for rich search results.
-function StructuredData() {
-  const productLd = {
+import HeroScene from "@/components/scenes/HeroScene";
+import RoomScene from "@/components/scenes/RoomScene";
+import ColorsScene from "@/components/scenes/ColorsScene";
+import ReadingScene from "@/components/scenes/ReadingScene";
+import SetupScene from "@/components/scenes/SetupScene";
+import RomanceScene from "@/components/scenes/RomanceScene";
+import GiftScene from "@/components/scenes/GiftScene";
+import SocialScene from "@/components/scenes/SocialScene";
+import OfferScene from "@/components/scenes/OfferScene";
+
+import { brand, pricing } from "@/lib/config";
+
+function ProductLd() {
+  const ld = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: "superb.choice Moon Lamp — 3D Realistic Moon Light",
     description:
-      "A hand-finished 3D Moon Lamp with realistic lunar texture, 16 color modes, touch control and rechargeable USB-C battery. Perfect aesthetic decor and gift.",
+      "A handcrafted 3D Moon Lamp with realistic lunar texture, 16 colors, touch control and rechargeable USB-C battery. The aesthetic upgrade your room deserves.",
     brand: { "@type": "Brand", name: brand.name },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "10000",
-      bestRating: "5",
-    },
+    aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "10000", bestRating: "5" },
     offers: {
       "@type": "Offer",
       priceCurrency: "INR",
@@ -44,61 +33,35 @@ function StructuredData() {
       itemCondition: "https://schema.org/NewCondition",
     },
   };
-
-  const faqLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  };
-
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
-      />
-    </>
-  );
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />;
 }
 
 export default function HomePage() {
   return (
     <>
-      <StructuredData />
-      <AnnouncementBar />
-      <Navbar />
+      <ProductLd />
 
-      <main>
-        <Hero />
-        <SocialProof />
-        <Features />
-        <Gallery />
-        <ProductShowcase />
-        <VideoSection />
-        <BeforeAfter />
-        <GiftSection />
-        <Testimonials />
-        <InstagramFeed />
-        <FAQ />
-        <TrustSection />
-        <LimitedOffer />
-        <Pricing />
+      {/* Atmosphere */}
+      <SkyBackdrop />
+      <Starfield />
+      <StoriesProgress segments={9} />
+
+      {/* The film — 9 cinematic scenes */}
+      <main className="relative">
+        <HeroScene />
+        <RoomScene />
+        <ColorsScene />
+        <ReadingScene />
+        <SetupScene />
+        <RomanceScene />
+        <GiftScene />
+        <SocialScene />
+        <OfferScene />
       </main>
 
-      <Footer />
-
-      {/* Floating conversion widgets */}
-      <PurchasePopup />
+      {/* Persistent conversion */}
+      <StickyBuyBar />
       <WhatsAppButton />
-      <StickyCTA />
     </>
   );
 }

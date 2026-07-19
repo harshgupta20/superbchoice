@@ -1,10 +1,13 @@
-# superb.choice — Moon Lamp Landing Page 🌙
+# 🌙 NIGHTFALL — superb.choice Moon Lamp Experience
 
-A premium, high-converting one-page landing page for the **superb.choice** Instagram store,
-built to sell the Moon Lamp and drive **WhatsApp / Instagram orders**.
+An immersive, **mobile-first** product *film* for the Moon Lamp — built to continue an Instagram
+Reel, not to feel like a website. You scroll through one night: the sky color-grades from **dusk →
+deep midnight → dawn**, the moon breathes and follows your finger, and every scene is a fullscreen
+cinematic "shot" that ends in one tap to buy.
 
-Built with **Next.js (App Router) · JavaScript · TailwindCSS · Framer Motion · Lucide Icons**.
-The moon is rendered in **pure CSS** — no external images, so it never breaks on deploy and stays fast.
+Built with **Next.js (App Router) · JavaScript · TailwindCSS · Framer Motion · Lucide**.
+The moon and every scene are **pure CSS + motion** — zero external images, so it's fast, offline-safe,
+and never breaks on deploy.
 
 ---
 
@@ -12,56 +15,56 @@ The moon is rendered in **pure CSS** — no external images, so it never breaks 
 
 ```bash
 npm install
-npm run dev        # http://localhost:3000
-npm run build      # production build
-npm run start      # serve the production build
+npm run dev        # http://localhost:3000  (open on a phone / device toolbar)
+npm run build && npm run start
 ```
 
----
+> Best viewed at **390–430px** width. On a real phone, tilt it — the moon reacts to the gyroscope.
 
 ## ⚙️ Before you deploy — edit ONE file
 
-All brand-specific values live in [`lib/config.js`](lib/config.js):
-
-| Value | What it does |
-| --- | --- |
-| `brand.whatsappNumber` | Your WhatsApp number (country code, no `+`/spaces) — powers every "Order" button |
-| `brand.instagramUrl` | Your Instagram profile link |
-| `brand.email` | Contact email in the footer |
-| `pricing.original` / `pricing.current` | Anchored (struck-through) price and sale price |
-| `pricing.unitsLeft` | Drives the "Only X left" scarcity indicator |
-
-Content (features, testimonials, gallery, FAQ, notifications) lives in [`lib/data.js`](lib/data.js).
-
-> **Add your real media:** the video modal in [`components/VideoSection.js`](components/VideoSection.js)
-> has a placeholder frame — drop in your Instagram Reel embed or an `<video>` tag.
-> For real lifestyle photos, swap the CSS scenes in [`components/Gallery.js`](components/Gallery.js)
-> with `next/image`.
+Everything brand-specific lives in [`lib/config.js`](lib/config.js):
+`whatsappNumber` (powers every Buy button), `instagramUrl`, `email`, and `pricing`.
+Content (colors, customer posts, scene lines) lives in [`lib/experience.js`](lib/experience.js).
 
 ---
 
-## 🧠 Conversion principles built in
+## 🎬 The 9 scenes (`components/scenes/`)
 
-Scarcity · Urgency (countdown) · Social proof (live purchase popups, animated stats) ·
-Authority · Trust badges · Price anchoring · FOMO · Loss aversion · Money-back guarantee ·
-Limited-stock bar · Emotional, benefit-driven copy · Sticky CTAs everywhere · FAQ to kill objections.
+| # | Scene | The moment | Signature interaction |
+|---|---|---|---|
+| 00 | **Hero** (dusk) | "Bring The Moon Home" | Moon follows finger + gyroscope, breathing glow |
+| 01 | **Room** | Cold empty room → warm cozy sanctuary | Scroll-scrubbed light transformation |
+| 02 | **Colors** | 16 shades | Tap swatches → moon + air recolor (auto-demos first) |
+| 03 | **Reading** | Wind down | Drag the brightness slider, glow dims live |
+| 04 | **Setup** | Gaming/desk | RGB pulses to a beat + equalizer |
+| 05 | **Romance** | Two glows drift into one | Soft mid-experience CTA |
+| 06 | **Gift** | Unbox the moon | **Tap the box** → lid flies off, moon rises in light |
+| 07 | **Social** | 10,000 rooms | Self-scrolling wall of IG-style posts |
+| 08 | **Offer** (dawn) | "Own Your Own Moon" | Countdown + scarcity + magnetic Buy button |
 
-## 🗂 Structure
+## 🏗 Architecture
 
 ```
-app/            layout, page, globals.css, SEO (robots, sitemap, icon), JSON-LD
-components/      all 20 sections + floating widgets
-components/ui/   reusable primitives (MoonLamp, Reveal, CTAButton, Countdown, ...)
-lib/             config.js (brand), data.js (content), utils.js (helpers + motion variants)
+app/                 layout (fonts, SEO, JSON-LD), page (assembles scenes), globals.css
+components/experience/
+  SkyBackdrop        fixed sky that color-grades with scroll (dusk→midnight→dawn)
+  Starfield          seeded twinkling stars + shooting stars + constellation
+  StoriesProgress    Instagram Stories chrome — segmented progress tied to scroll
+  LivingMoon         the hero: finger/gyro tilt, breathing glow, colorable, 3D
+  Scene / RevealText / PulseCTA / Magnetic / StickyBuyBar   reusable primitives
+components/scenes/   the 9 cinematic scenes
+components/WhatsAppButton.js · components/ui/Countdown.js
+lib/                 config (brand) · experience (content) · utils (helpers)
 ```
 
-## 📈 Performance & SEO
+## ⚡ Performance & UX
 
-- Fully static prerender · ~150 kB First Load JS
-- `next/font` self-hosting · AVIF/WebP images · reduced-motion support
-- Open Graph + Twitter cards + Product & FAQ structured data (rich results)
-- Semantic, accessible markup with ARIA labels
+- Fully static prerender · ~147 kB First Load JS · no external image requests
+- Motion is GPU-only (transform/opacity), animations run on scroll/visibility
+- Seeded starfield = **no hydration mismatch / layout shift**
+- `prefers-reduced-motion` respected · 52px+ thumb-friendly tap targets · Product JSON-LD
 
 ---
 
-Made with 🌙 for **superb.choice**.
+Made with 🌙 for **superb.choice** — record it, and it's a Reel.
