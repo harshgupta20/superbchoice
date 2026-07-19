@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #090909;
+  --accent: #ffd369;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Gentle reel-like snap that never traps the user */
+  scroll-snap-type: y proximity;
+  background: #090909;
+}
+
+body {
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+}
+
+@layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .glass-gold {
+    background: rgba(255, 211, 105, 0.07);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 211, 105, 0.2);
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #fff4d6 0%, #ffd369 48%, #e6b84c 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Primary breathing CTA */
+  .btn-moon {
+    @apply relative inline-flex min-h-[52px] items-center justify-center gap-2 overflow-hidden rounded-full px-8 text-base font-semibold text-night-950;
+    background: linear-gradient(135deg, #fff4d6 0%, #ffd369 45%, #e6b84c 100%);
+    box-shadow: 0 10px 44px -6px rgba(255, 211, 105, 0.55);
+  }
+}
+
+@layer utilities {
+  /* Each scene fills the mobile viewport and snaps gently */
+  .scene {
+    @apply relative flex min-h-[100svh] w-full flex-col items-center justify-center overflow-hidden px-6 py-16;
+    scroll-snap-align: start;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-gold/25 bg-gold/10 px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.22em] text-gold;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  /* GPU hints for smooth 60fps motion */
+  .gpu {
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+}
+
+::selection {
+  background: rgba(255, 211, 105, 0.3);
+  color: #fff;
+}
+
+/* Slim scrollbar */
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+    scroll-snap-type: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
