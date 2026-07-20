@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform, useMotionTemplate, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionTemplate } from "framer-motion";
 
 /**
  * Fixed, full-screen sky that color-grades with scroll:
@@ -9,8 +9,7 @@ import { motion, useScroll, useTransform, useMotionTemplate, useSpring } from "f
  */
 export default function SkyBackdrop() {
   const { scrollYProgress } = useScroll();
-  // Smooth the raw scroll so the grade eases instead of snapping.
-  const p = useSpring(scrollYProgress, { stiffness: 90, damping: 30, mass: 0.4 });
+  const p = scrollYProgress;
 
   const skyTop = useTransform(
     p,
@@ -46,11 +45,11 @@ export default function SkyBackdrop() {
       {/* Aurora ribbons for deep night */}
       <motion.div className="absolute inset-0" style={{ opacity: auroraOpacity }}>
         <div
-          className="absolute left-[-10%] top-[18%] h-64 w-[120%] rounded-full blur-3xl animate-aurora"
+          className="absolute left-[-10%] top-[18%] h-64 w-[120%] rounded-full blur-2xl animate-aurora"
           style={{ background: "radial-gradient(60% 60% at 50% 50%, rgba(120,255,214,0.22), transparent 70%)" }}
         />
         <div
-          className="absolute left-[-10%] top-[30%] h-64 w-[120%] rounded-full blur-3xl animate-aurora"
+          className="absolute left-[-10%] top-[30%] h-64 w-[120%] rounded-full blur-2xl animate-aurora"
           style={{
             animationDelay: "-6s",
             background: "radial-gradient(60% 60% at 50% 50%, rgba(150,120,255,0.2), transparent 70%)",

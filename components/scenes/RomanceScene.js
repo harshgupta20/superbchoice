@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
 import Scene from "@/components/experience/Scene";
-import LivingMoon from "@/components/experience/LivingMoon";
+import CrystalBall from "@/components/experience/CrystalBall";
 import RevealText from "@/components/experience/RevealText";
 import PulseCTA from "@/components/experience/PulseCTA";
 import { whatsappLink } from "@/lib/config";
@@ -20,11 +20,8 @@ export default function RomanceScene() {
       </RevealText>
 
       <div className="relative flex h-[300px] w-full items-center justify-center">
-        <div className="pointer-events-none absolute h-72 w-72 rounded-full blur-3xl"
-          style={{ background: "radial-gradient(circle, rgba(255,140,120,0.45) 0%, rgba(255,110,150,0.18) 45%, transparent 72%)" }}
-        />
         <div className="animate-float">
-          <LivingMoon size={210} glow="rgba(255,150,130,0.55)" tint="rgba(255,120,140,0.28)" />
+          <CrystalBall design="moon" size={188} glow="rgba(255,150,130,0.6)" />
         </div>
 
         {/* Two glows drifting together */}
@@ -54,7 +51,7 @@ export default function RomanceScene() {
       </div>
 
       <div className="mt-6 w-full max-w-xs">
-        <PulseCTA href={whatsappLink("Hi! I want the Moon Lamp for a special someone 💛")}>
+        <PulseCTA href={whatsappLink("Hi! I want the Crystal Ball Lamp for a special someone 💛")}>
           Make Tonight Magic
         </PulseCTA>
       </div>

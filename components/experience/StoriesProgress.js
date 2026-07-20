@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Moon, Volume2, X } from "lucide-react";
 import { brand } from "@/lib/config";
 
@@ -17,7 +17,7 @@ function Segment({ p, index, count }) {
 /** Instagram Stories–style chrome pinned to the top: segmented progress + handle row. */
 export default function StoriesProgress({ segments = 9 }) {
   const { scrollYProgress } = useScroll();
-  const p = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.3 });
+  const p = scrollYProgress;
 
   return (
     <div className="fixed inset-x-0 top-0 z-50 px-3 pt-2.5">

@@ -32,7 +32,7 @@ export default function PurchasePopup() {
                 {purchase.name} from {purchase.city}
               </p>
               <p className="text-[11px] text-white/60">
-                {purchase.verb} {purchase.qty > 1 ? `${purchase.qty} Moon Lamps` : "a Moon Lamp"}
+                {purchase.verb} {purchase.qty > 1 ? `${purchase.qty} Crystal Balls` : "a Crystal Ball"}
               </p>
               <p className="mt-0.5 flex items-center gap-1 text-[10px] text-gold">
                 <BadgeCheck size={11} /> Verified · {purchase.when}

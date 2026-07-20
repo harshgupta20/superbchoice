@@ -3,9 +3,9 @@
 import { motion } from "framer-motion";
 import { ChevronsDown, Sparkles, Star } from "lucide-react";
 import Scene from "@/components/experience/Scene";
-import LivingMoon from "@/components/experience/LivingMoon";
+import CrystalBall from "@/components/experience/CrystalBall";
 import PulseCTA from "@/components/experience/PulseCTA";
-import { whatsappLink, pricing } from "@/lib/config";
+import { pricing } from "@/lib/config";
 import { formatPrice } from "@/lib/utils";
 import { sceneLines } from "@/lib/experience";
 
@@ -32,7 +32,7 @@ export default function HeroScene() {
         className="flex flex-1 items-center justify-center"
       >
         <div className="animate-float">
-          <LivingMoon size={300} interactive fragments />
+          <CrystalBall design="moon" size={244} interactive fragments />
         </div>
       </motion.div>
 
@@ -83,7 +83,7 @@ export default function HeroScene() {
               {pricing.discountPercent}% OFF
             </span>
           </div>
-          <PulseCTA href={whatsappLink()} className="max-w-xs">
+          <PulseCTA href="#shop" className="max-w-xs">
             Buy Now
           </PulseCTA>
         </motion.div>

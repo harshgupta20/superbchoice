@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Gift } from "lucide-react";
 import Scene from "@/components/experience/Scene";
-import LivingMoon from "@/components/experience/LivingMoon";
+import CrystalBall from "@/components/experience/CrystalBall";
 import RevealText from "@/components/experience/RevealText";
 import PulseCTA from "@/components/experience/PulseCTA";
 import { whatsappLink } from "@/lib/config";
@@ -51,7 +51,7 @@ export default function GiftScene() {
           transition={{ duration: 0.9, ease, delay: open ? 0.2 : 0 }}
         >
           <div className={open ? "animate-float" : ""}>
-            <LivingMoon size={170} fragments={open} />
+            <CrystalBall design="moon" size={150} fragments={open} />
           </div>
         </motion.div>
 
@@ -106,7 +106,7 @@ export default function GiftScene() {
             transition={{ delay: 0.6 }}
             className="mt-4 w-full max-w-xs"
           >
-            <PulseCTA href={whatsappLink("Hi! 🎁 I want to gift the Moon Lamp. Please help me order.")}>
+            <PulseCTA href={whatsappLink("Hi! 🎁 I want to gift the Crystal Ball Lamp. Please help me order.")}>
               Gift It Now
             </PulseCTA>
           </motion.div>

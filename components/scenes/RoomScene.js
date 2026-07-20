@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Scene from "@/components/experience/Scene";
-import LivingMoon from "@/components/experience/LivingMoon";
+import CrystalBall from "@/components/experience/CrystalBall";
 import RevealText from "@/components/experience/RevealText";
 import { sceneLines } from "@/lib/experience";
 
@@ -51,7 +51,7 @@ export default function RoomScene() {
           {/* Shelf + the moon lamp */}
           <div className="absolute bottom-[26%] right-[14%] flex flex-col items-center">
             <div className="relative">
-              <LivingMoon size={104} />
+              <CrystalBall design="moon" size={92} base={false} />
               {/* "off" dimmer */}
               <motion.span
                 className="absolute inset-0 rounded-full bg-black"

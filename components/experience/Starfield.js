@@ -14,7 +14,7 @@ function mulberry32(seed) {
   };
 }
 
-export default function Starfield({ count = 80 }) {
+export default function Starfield({ count = 40 }) {
   const { scrollYProgress } = useScroll();
   // Stars are dim at dusk, brilliant at midnight, fade toward dawn.
   const opacity = useTransform(scrollYProgress, [0, 0.32, 0.7, 1], [0.25, 1, 1, 0.3]);

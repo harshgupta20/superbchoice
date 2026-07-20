@@ -13,20 +13,31 @@ const TILE = [
 ];
 
 function MiniMoon({ i }) {
+  const g = ["rgba(255,196,120,0.7)", "rgba(160,150,255,0.6)", "rgba(255,150,170,0.6)", "rgba(120,210,255,0.55)"][i % 4];
   return (
     <span
-      className="block h-14 w-14 rounded-full"
+      className="relative block h-14 w-14 rounded-full"
       style={{
-        background: "radial-gradient(circle at 34% 30%, #fff9ec, #ffe6ad 45%, #d99f3c 100%)",
-        boxShadow: `0 0 22px ${["rgba(255,211,105,0.6)", "rgba(122,91,255,0.55)", "rgba(255,120,140,0.55)", "rgba(80,200,255,0.5)"][i % 4]}`,
+        background: [
+          `radial-gradient(circle at 50% 80%, ${g} 0%, transparent 55%)`,
+          "radial-gradient(circle at 38% 30%, rgba(255,255,255,0.28), transparent 42%)",
+          "radial-gradient(circle at 50% 50%, rgba(0,0,0,0.1), rgba(0,0,0,0.4) 92%)",
+        ].join(","),
+        border: "1px solid rgba(255,255,255,0.15)",
+        boxShadow: `inset 0 0 10px rgba(255,255,255,0.12), 0 0 20px ${g}`,
       }}
-    />
+    >
+      <span
+        className="absolute left-1/2 top-[14%] h-2.5 w-6 -translate-x-1/2 rounded-full"
+        style={{ background: "radial-gradient(circle, rgba(255,244,214,0.9), transparent 70%)", filter: "blur(1px)" }}
+      />
+    </span>
   );
 }
 
 function PostCard({ post, i }) {
   return (
-    <figure className="mb-3 overflow-hidden rounded-2xl glass">
+    <figure className="mb-3 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.05]">
       <div className="flex items-center gap-2 px-3 py-2">
         <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-tr from-gold via-rose-400 to-fuchsia-500 text-[10px] font-bold text-night-950">
           {post.handle.slice(0, 2).toUpperCase()}

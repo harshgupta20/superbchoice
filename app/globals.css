@@ -16,27 +16,32 @@ html {
   /* Gentle reel-like snap that never traps the user */
   scroll-snap-type: y proximity;
   background: #090909;
+  overflow-x: hidden;
 }
 
 body {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
   color: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  overscroll-behavior-x: none;
   text-rendering: optimizeLegibility;
 }
 
 @layer components {
   .glass {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
   .glass-gold {
-    background: rgba(255, 211, 105, 0.07);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgba(255, 211, 105, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 211, 105, 0.2);
   }
 
@@ -81,6 +86,13 @@ body {
   .preserve-3d {
     transform-style: preserve-3d;
   }
+}
+
+/* Never allow a section to push horizontal overflow */
+main,
+section,
+footer {
+  overflow-x: clip;
 }
 
 ::selection {

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Scene from "@/components/experience/Scene";
-import LivingMoon from "@/components/experience/LivingMoon";
+import CrystalBall from "@/components/experience/CrystalBall";
 import RevealText from "@/components/experience/RevealText";
 import { sceneLines } from "@/lib/experience";
 
@@ -34,7 +34,7 @@ export default function SetupScene() {
       <div className="relative flex h-[300px] w-full items-center justify-center">
         {/* reactive glow */}
         <motion.div
-          className="pointer-events-none absolute h-72 w-72 rounded-full blur-3xl"
+          className="pointer-events-none absolute h-64 w-64 rounded-full blur-2xl"
           animate={{ background: `radial-gradient(circle, ${c.glow} 0%, transparent 70%)` }}
           transition={{ duration: 0.9 }}
         />
@@ -46,7 +46,7 @@ export default function SetupScene() {
         </div>
 
         <div className="animate-float">
-          <LivingMoon size={190} glow={c.glow} tint={c.tint} />
+          <CrystalBall design="solar" size={180} glow={c.glow} ambient={false} />
         </div>
 
         {/* Desk line + keyboard underglow */}

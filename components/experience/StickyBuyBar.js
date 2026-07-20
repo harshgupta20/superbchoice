@@ -19,18 +19,18 @@ export default function StickyBuyBar() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    // Hide when the final offer scene (which has its own CTA) is on screen.
-    const offer = document.getElementById("offer");
+    // Hide when the product buy block (which has its own CTA) is on screen.
+    const shop = document.getElementById("shop");
     let io;
-    if (offer) {
+    if (shop) {
       io = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) setVisible(false);
           else onScroll();
         },
-        { threshold: 0.35 }
+        { threshold: 0.3 }
       );
-      io.observe(offer);
+      io.observe(shop);
     }
     return () => {
       window.removeEventListener("scroll", onScroll);

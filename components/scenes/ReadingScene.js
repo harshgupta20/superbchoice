@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { Sun, BookOpen } from "lucide-react";
 import Scene from "@/components/experience/Scene";
-import LivingMoon from "@/components/experience/LivingMoon";
+import CrystalBall from "@/components/experience/CrystalBall";
 import RevealText from "@/components/experience/RevealText";
 import { sceneLines } from "@/lib/experience";
 
@@ -22,13 +21,8 @@ export default function ReadingScene() {
       </RevealText>
 
       <div className="relative flex h-[280px] w-full items-center justify-center">
-        <motion.div
-          className="pointer-events-none absolute h-64 w-64 rounded-full blur-3xl"
-          animate={{ opacity: brightness }}
-          style={{ background: "radial-gradient(circle, rgba(255,200,120,0.6) 0%, transparent 70%)" }}
-        />
         <div className="animate-float">
-          <LivingMoon size={200} glow="rgba(255,205,130,0.6)" brightness={brightness} />
+          <CrystalBall design="moon" size={190} glow="rgba(255,205,130,0.6)" brightness={brightness} />
         </div>
         {/* dim film that grows as you lower brightness */}
         <div
