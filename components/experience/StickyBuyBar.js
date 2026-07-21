@@ -3,13 +3,16 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
-import { whatsappLink, pricing } from "@/lib/config";
 import { formatPrice } from "@/lib/utils";
 import { useLiveStore } from "./LiveStoreProvider";
+import { useCheckout } from "@/components/store/CheckoutProvider";
+import { useSelection } from "@/components/store/SelectionProvider";
 
 export default function StickyBuyBar() {
   const [visible, setVisible] = useState(false);
   const { stock } = useLiveStore();
+  const { open } = useCheckout();
+  const { price, original, order } = useSelection();
 
   useEffect(() => {
     const onScroll = () => {
@@ -51,20 +54,21 @@ export default function StickyBuyBar() {
           <div className="mx-auto flex max-w-md items-center gap-3 rounded-full border border-white/10 bg-night-900/85 p-1.5 pl-4 shadow-card backdrop-blur-xl">
             <div className="shrink-0">
               <div className="flex items-baseline gap-1.5">
-                <span className="font-display text-base font-extrabold text-gold">{formatPrice(pricing.current)}</span>
-                <span className="text-[11px] text-white/40 line-through">{formatPrice(pricing.original)}</span>
+                <span className="font-display text-base font-extrabold text-gold">{formatPrice(price)}</span>
+                <span className="text-[11px] text-white/40 line-through">{formatPrice(original)}</span>
               </div>
               <span className="text-[9px] font-semibold uppercase tracking-wide text-red-400">
                 {stock} left
               </span>
             </div>
-            <a
-              href={whatsappLink()}
+            <button
+              type="button"
+              onClick={() => open(order)}
               className="flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-full text-sm font-bold text-night-950"
               style={{ backgroundImage: "linear-gradient(135deg,#fff4d6 0%,#ffd369 45%,#e6b84c 100%)" }}
             >
               <ShoppingBag size={17} /> Buy Now
-            </a>
+            </button>
           </div>
         </motion.div>
       )}

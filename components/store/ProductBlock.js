@@ -1,31 +1,21 @@
 "use client";
 
-import { useMemo, useState } from "react";
 import { Star, Minus, Plus, Truck, ShieldCheck, RefreshCw, Check } from "lucide-react";
-import Moon3DStage from "@/components/experience/Moon3DStage";
-import CrystalBall from "@/components/experience/CrystalBall";
+import ProductPhoto from "@/components/store/ProductPhoto";
 import PulseCTA from "@/components/experience/PulseCTA";
 import Countdown from "@/components/ui/Countdown";
 import { useLiveStore } from "@/components/experience/LiveStoreProvider";
 import { useCheckout } from "@/components/store/CheckoutProvider";
+import { useSelection } from "@/components/store/SelectionProvider";
 import { whatsappLink } from "@/lib/config";
-import { designs, getDesign, DESIGN_PRICE, DESIGN_ORIGINAL } from "@/lib/designs";
+import { designs } from "@/lib/designs";
 import { designOrderMessage } from "@/lib/product";
 import { formatPrice } from "@/lib/utils";
 
 export default function ProductBlock() {
   const { stock } = useLiveStore();
   const { open } = useCheckout();
-  const [designId, setDesignId] = useState("moon");
-  const [qty, setQty] = useState(1);
-
-  const design = getDesign(designId);
-
-  const { price, original, save, percent } = useMemo(() => {
-    const price = DESIGN_PRICE * qty;
-    const original = DESIGN_ORIGINAL * qty;
-    return { price, original, save: original - price, percent: Math.round(((original - price) / original) * 100) };
-  }, [qty]);
+  const { designId, setDesignId, qty, setQty, design, price, original, save, percent, order } = useSelection();
 
   const orderHref = whatsappLink(designOrderMessage(design, qty, price));
 
@@ -39,9 +29,13 @@ export default function ProductBlock() {
           Get Yours <span className="text-gradient-gold">Tonight</span>
         </h2>
 
-        {/* 3D product stage */}
-        <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-4 shadow-card">
-          <Moon3DStage design={designId} size={190} />
+        {/* Product photo */}
+        <div className="relative rounded-[2rem] border border-white/10 bg-white/[0.03] p-4 shadow-card">
+          {/* warm glow behind the frame */}
+          <div className="pointer-events-none absolute left-1/2 top-1/2 -z-0 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/20 blur-2xl" />
+          <div className="relative mx-auto aspect-square w-full max-w-[300px] animate-float overflow-hidden rounded-[1.4rem] border border-white/10 bg-black/30">
+            <ProductPhoto src={design.image} alt={`Crystal Ball Lamp — ${design.label}`} design={designId} variant="main" />
+          </div>
         </div>
 
         {/* Design chooser (doubles as gallery) */}
@@ -63,8 +57,8 @@ export default function ProductBlock() {
                     <Check size={12} strokeWidth={3} />
                   </span>
                 )}
-                <div className="pointer-events-none flex h-16 items-center justify-center">
-                  <CrystalBall design={d.id} size={54} base={false} />
+                <div className="pointer-events-none mb-1 h-16 w-full overflow-hidden rounded-xl">
+                  <ProductPhoto src={d.image} alt={d.label} design={d.id} variant="thumb" />
                 </div>
                 <span className="text-[13px] font-bold leading-tight text-white">{d.label}</span>
                 <span className="text-[10px] text-gold">{formatPrice(d.price)}</span>
@@ -133,18 +127,7 @@ export default function ProductBlock() {
 
         {/* CTA */}
         <div className="mt-5">
-          <PulseCTA
-            onClick={() =>
-              open({
-                title: `Crystal Ball Lamp — ${design.label}`,
-                qty,
-                amount: price,
-                note: `superb.choice ${design.label} x${qty}`,
-              })
-            }
-          >
-            Buy Now — {formatPrice(price)}
-          </PulseCTA>
+          <PulseCTA onClick={() => open(order)}>Buy Now — {formatPrice(price)}</PulseCTA>
           <a href={orderHref} className="mt-3 block text-center text-xs text-white/50 underline underline-offset-4">
             or order on WhatsApp
           </a>

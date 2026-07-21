@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import QRCode from "react-qr-code";
-import { X, ShieldCheck, Smartphone, Check, ArrowRight } from "lucide-react";
+import { X, ShieldCheck, Smartphone, Check, ArrowRight, Truck } from "lucide-react";
 import { upiLink, whatsappLink, upi } from "@/lib/config";
 import { formatPrice } from "@/lib/utils";
 
@@ -120,6 +120,11 @@ export default function Checkout({ order, onClose }) {
               <span className="font-display text-xl font-extrabold text-gradient-gold">
                 {order ? formatPrice(order.amount) : ""}
               </span>
+            </div>
+
+            {/* Free delivery highlight */}
+            <div className="mb-5 flex items-center justify-center gap-2 rounded-xl border border-emerald-400/30 bg-emerald-400/10 px-4 py-2.5 text-sm font-semibold text-emerald-300">
+              <Truck size={16} /> Free Home Delivery across India
             </div>
 
             {/* Details form */}

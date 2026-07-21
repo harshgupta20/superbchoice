@@ -1,14 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, Gem, Truck } from "lucide-react";
+import { ShieldCheck, Truck, RefreshCw } from "lucide-react";
 import { paymentMethods } from "@/lib/product";
 import { revealViewport } from "@/lib/utils";
 
 const GUARANTEES = [
-  { icon: ShieldCheck, title: "7-Day Money Back", desc: "Not in love? Full refund." },
-  { icon: Gem, title: "6-Month Warranty", desc: "Covered against defects." },
-  { icon: Truck, title: "Fast Free Shipping", desc: "Dispatched in 24 hours." },
+  { icon: Truck, title: "Free Home Delivery", desc: "Right to your doorstep." },
+  { icon: RefreshCw, title: "7-Day Replacement", desc: "Damaged? We replace it." },
+  { icon: ShieldCheck, title: "Secure Payment", desc: "Pay safely via UPI." },
 ];
 
 export default function PaymentTrust() {

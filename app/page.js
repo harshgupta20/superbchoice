@@ -16,8 +16,8 @@ import GiftScene from "@/components/scenes/GiftScene";
 import SocialScene from "@/components/scenes/SocialScene";
 
 import CheckoutProvider from "@/components/store/CheckoutProvider";
+import SelectionProvider from "@/components/store/SelectionProvider";
 import ProductBlock from "@/components/store/ProductBlock";
-import Bundles from "@/components/store/Bundles";
 import Benefits from "@/components/store/Benefits";
 import ReviewsWall from "@/components/store/ReviewsWall";
 import PaymentTrust from "@/components/store/PaymentTrust";
@@ -52,6 +52,7 @@ export default function HomePage() {
 
       <LiveStoreProvider>
        <CheckoutProvider>
+        <SelectionProvider>
         {/* Atmosphere */}
         <SkyBackdrop />
         <Starfield />
@@ -70,7 +71,6 @@ export default function HomePage() {
 
           {/* The store — single-product commerce */}
           <ProductBlock />
-          <Bundles />
           <Benefits />
           <ReviewsWall />
           <PaymentTrust />
@@ -82,6 +82,7 @@ export default function HomePage() {
         <StickyBuyBar />
         <WhatsAppButton />
         <PurchasePopup />
+        </SelectionProvider>
        </CheckoutProvider>
       </LiveStoreProvider>
     </>

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Scene from "@/components/experience/Scene";
-import CrystalBall from "@/components/experience/CrystalBall";
+import ProductPhoto from "@/components/store/ProductPhoto";
 import RevealText from "@/components/experience/RevealText";
 import { designs } from "@/lib/designs";
 
@@ -33,19 +33,20 @@ export default function DesignsScene() {
         Moon, galaxy or the divine — tap to switch.
       </RevealText>
 
-      {/* Crystal ball morphing between designs */}
+      {/* Product photo blending into the scene (no background box) */}
       <div className="relative flex h-[320px] w-full items-center justify-center">
+        <div className="pointer-events-none absolute h-60 w-60 rounded-full bg-gold/15 blur-2xl" />
         <AnimatePresence mode="wait">
           <motion.div
             key={active.id}
-            initial={{ opacity: 0, scale: 0.9, rotateY: -20 }}
-            animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-            exit={{ opacity: 0, scale: 0.9, rotateY: 20 }}
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.92 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            style={{ perspective: 900 }}
+            className="relative h-[300px] w-[300px]"
           >
-            <div className="animate-float">
-              <CrystalBall design={active.id} size={210} />
+            <div className="h-full w-full animate-float">
+              <ProductPhoto src={active.image} alt={active.label} design={active.id} variant="main" feather />
             </div>
           </motion.div>
         </AnimatePresence>
@@ -75,13 +76,13 @@ export default function DesignsScene() {
             type="button"
             onClick={() => pick(i)}
             aria-label={`Show ${d.label}`}
-            className={`flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border transition-all ${
+            className={`h-16 w-16 overflow-hidden rounded-2xl border transition-all ${
               index === i ? "border-gold bg-gold/10" : "border-white/12 bg-white/[0.03]"
             }`}
           >
-            <span className="pointer-events-none scale-90">
-              <CrystalBall design={d.id} size={48} base={false} />
-            </span>
+            <div className="pointer-events-none h-full w-full">
+              <ProductPhoto src={d.image} alt={d.label} design={d.id} variant="thumb" feather />
+            </div>
           </button>
         ))}
       </div>

@@ -6,7 +6,6 @@ import { paymentMethods } from "@/lib/product";
 
 const NAV = [
   { label: "Shop", href: "#shop" },
-  { label: "Offers", href: "#offers" },
   { label: "Reviews", href: "#reviews" },
 ];
 
