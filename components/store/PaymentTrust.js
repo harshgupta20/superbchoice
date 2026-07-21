@@ -1,14 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, Truck, RefreshCw } from "lucide-react";
+import { Wallet, Truck, RefreshCw } from "lucide-react";
 import { paymentMethods } from "@/lib/product";
 import { revealViewport } from "@/lib/utils";
 
 const GUARANTEES = [
   { icon: Truck, title: "Free Home Delivery", desc: "Right to your doorstep." },
+  { icon: Wallet, title: "Cash on Delivery", desc: "Pay when it arrives." },
   { icon: RefreshCw, title: "7-Day Replacement", desc: "Damaged? We replace it." },
-  { icon: ShieldCheck, title: "Secure Payment", desc: "Pay safely via UPI." },
 ];
 
 export default function PaymentTrust() {

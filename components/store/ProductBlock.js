@@ -1,6 +1,6 @@
 "use client";
 
-import { Star, Minus, Plus, Truck, ShieldCheck, RefreshCw, Check } from "lucide-react";
+import { Star, Minus, Plus, Truck, Wallet, RefreshCw, Check } from "lucide-react";
 import ProductPhoto from "@/components/store/ProductPhoto";
 import PulseCTA from "@/components/experience/PulseCTA";
 import Countdown from "@/components/ui/Countdown";
@@ -8,7 +8,7 @@ import { useLiveStore } from "@/components/experience/LiveStoreProvider";
 import { useCheckout } from "@/components/store/CheckoutProvider";
 import { useSelection } from "@/components/store/SelectionProvider";
 import { whatsappLink } from "@/lib/config";
-import { designs } from "@/lib/designs";
+import { designs, COD_PRICE } from "@/lib/designs";
 import { designOrderMessage } from "@/lib/product";
 import { formatPrice } from "@/lib/utils";
 
@@ -91,6 +91,16 @@ export default function ProductBlock() {
         </div>
         <p className="mt-1 text-xs text-white/50">You save {formatPrice(save)} · Inclusive of all taxes</p>
 
+        {/* Payment options */}
+        <div className="mt-3 flex flex-wrap gap-2 text-[11px]">
+          <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 font-medium text-white/70">
+            Pay Online {formatPrice(price)}
+          </span>
+          <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 font-medium text-white/70">
+            Cash on Delivery {formatPrice(COD_PRICE * qty)}
+          </span>
+        </div>
+
         {/* Quantity */}
         <div className="mt-6 flex items-center justify-between">
           <p className="text-xs font-semibold uppercase tracking-wider text-white/50">Quantity</p>
@@ -134,8 +144,8 @@ export default function ProductBlock() {
 
         {/* Trust row */}
         <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-white/55">
-          <span className="inline-flex items-center gap-1.5"><Truck size={14} className="text-gold" /> Free shipping</span>
-          <span className="inline-flex items-center gap-1.5"><ShieldCheck size={14} className="text-gold" /> Secure order</span>
+          <span className="inline-flex items-center gap-1.5"><Truck size={14} className="text-gold" /> Free delivery</span>
+          <span className="inline-flex items-center gap-1.5"><Wallet size={14} className="text-gold" /> COD available</span>
           <span className="inline-flex items-center gap-1.5"><RefreshCw size={14} className="text-gold" /> 7-day replace</span>
         </div>
       </div>
