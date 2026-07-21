@@ -134,8 +134,13 @@ export default function ProductBlock() {
           </span>
         </div>
 
+        {/* COD highlight */}
+        <div className="mt-6 flex items-center justify-center gap-2 rounded-2xl border border-emerald-400/30 bg-emerald-400/10 px-4 py-3 text-center text-sm font-semibold text-emerald-300">
+          <Wallet size={17} /> Cash on Delivery available — order now, pay when it arrives
+        </div>
+
         {/* CTA */}
-        <div className="mt-5">
+        <div className="mt-4">
           <PulseCTA onClick={() => open(order)}>Buy Now — {formatPrice(price)}</PulseCTA>
           <a href={orderHref} className="mt-3 block text-center text-xs text-white/50 underline underline-offset-4">
             or order on WhatsApp

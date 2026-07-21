@@ -57,8 +57,11 @@ export default function StickyBuyBar() {
                 <span className="font-display text-base font-extrabold text-gold">{formatPrice(price)}</span>
                 <span className="text-[11px] text-white/40 line-through">{formatPrice(original)}</span>
               </div>
-              <span className="text-[9px] font-semibold uppercase tracking-wide text-red-400">
-                {stock} left
+              <span className="flex items-center gap-1.5">
+                <span className="text-[9px] font-semibold uppercase tracking-wide text-red-400">{stock} left</span>
+                <span className="rounded bg-emerald-500/15 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-emerald-300">
+                  COD ✓
+                </span>
               </span>
             </div>
             <button

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ChevronsDown, Sparkles, Star } from "lucide-react";
+import { ChevronsDown, Sparkles, Star, Wallet, Truck, RefreshCw } from "lucide-react";
 import Scene from "@/components/experience/Scene";
 import ProductPhoto from "@/components/store/ProductPhoto";
 import PulseCTA from "@/components/experience/PulseCTA";
@@ -93,6 +93,24 @@ export default function HeroScene() {
           <PulseCTA href="#shop" className="max-w-xs">
             Buy Now
           </PulseCTA>
+        </motion.div>
+
+        {/* Trust chips — COD highlighted */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.82 }}
+          className="flex flex-wrap items-center justify-center gap-2"
+        >
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] font-medium text-white/70">
+            <Truck size={12} className="text-gold" /> Free Delivery
+          </span>
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/40 bg-emerald-400/15 px-3 py-1.5 text-[11px] font-bold text-emerald-300">
+            <Wallet size={12} /> Cash on Delivery ✓
+          </span>
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] font-medium text-white/70">
+            <RefreshCw size={12} className="text-gold" /> 7-Day Replace
+          </span>
         </motion.div>
       </div>
 
