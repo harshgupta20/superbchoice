@@ -8,14 +8,14 @@ import { useLiveStore } from "@/components/experience/LiveStoreProvider";
 import { useCheckout } from "@/components/store/CheckoutProvider";
 import { useSelection } from "@/components/store/SelectionProvider";
 import { whatsappLink } from "@/lib/config";
-import { designs, COD_PRICE } from "@/lib/designs";
+import { designs } from "@/lib/designs";
 import { designOrderMessage } from "@/lib/product";
 import { formatPrice } from "@/lib/utils";
 
 export default function ProductBlock() {
   const { stock } = useLiveStore();
   const { open } = useCheckout();
-  const { designId, setDesignId, qty, setQty, design, price, original, save, percent, order } = useSelection();
+  const { designId, setDesignId, qty, setQty, design, price, original, save, percent, codTotal, order } = useSelection();
 
   const orderHref = whatsappLink(designOrderMessage(design, qty, price));
 
@@ -97,7 +97,7 @@ export default function ProductBlock() {
             Pay Online {formatPrice(price)}
           </span>
           <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 font-medium text-white/70">
-            Cash on Delivery {formatPrice(COD_PRICE * qty)}
+            Cash on Delivery {formatPrice(codTotal)}
           </span>
         </div>
 

@@ -3,18 +3,35 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import QRCode from "react-qr-code";
-import { X, ShieldCheck, Smartphone, Check, ArrowRight, Truck, Banknote } from "lucide-react";
+import { X, ShieldCheck, Smartphone, Check, ArrowRight, Truck, Banknote, ChevronDown } from "lucide-react";
 import { upiLink, whatsappLink, upi } from "@/lib/config";
-import { ONLINE_PRICE, COD_PRICE } from "@/lib/designs";
 import { formatPrice } from "@/lib/utils";
 
 const STORE_KEY = "sc_buyer";
 const PHONE_RE = /^[6-9]\d{9}$/;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PIN_RE = /^[1-9]\d{5}$/;
+
+const INDIAN_STATES = [
+  "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat",
+  "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh",
+  "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan",
+  "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal",
+  "Andaman & Nicobar Islands", "Chandigarh", "Dadra & Nagar Haveli and Daman & Diu", "Delhi",
+  "Jammu & Kashmir", "Ladakh", "Lakshadweep", "Puducherry",
+];
 
 export default function Checkout({ order, onClose }) {
   const open = !!order;
-  const [form, setForm] = useState({ name: "", phone: "", email: "" });
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    address: "",
+    pincode: "",
+    city: "",
+    state: "",
+  });
   const [touched, setTouched] = useState(false);
   const [paid, setPaid] = useState(false);
   const [method, setMethod] = useState("online"); // "online" | "cod"
@@ -42,12 +59,17 @@ export default function Checkout({ order, onClose }) {
     name: form.name.trim().length < 2 ? "Enter your name" : "",
     phone: !PHONE_RE.test(form.phone) ? "Enter a valid 10-digit number" : "",
     email: !EMAIL_RE.test(form.email) ? "Enter a valid email" : "",
+    address: form.address.trim().length < 6 ? "Enter your full address" : "",
+    pincode: !PIN_RE.test(form.pincode) ? "Enter a valid 6-digit PIN" : "",
+    city: form.city.trim().length < 2 ? "Enter your city" : "",
+    state: !form.state ? "Select your state" : "",
   };
-  const valid = !errors.name && !errors.phone && !errors.email;
+  const valid = Object.values(errors).every((e) => !e);
 
   const set = (k) => (e) => {
     let v = e.target.value;
     if (k === "phone") v = v.replace(/\D/g, "").slice(0, 10);
+    if (k === "pincode") v = v.replace(/\D/g, "").slice(0, 6);
     setForm((f) => ({ ...f, [k]: v }));
   };
 
@@ -69,23 +91,27 @@ export default function Checkout({ order, onClose }) {
   };
 
   const qty = order?.qty || 1;
-  const onlineTotal = ONLINE_PRICE * qty;
-  const codTotal = COD_PRICE * qty;
+  const onlineTotal = (order?.unitPrice ?? 199) * qty;
+  const codTotal = (order?.unitCod ?? 229) * qty;
   const amount = method === "cod" ? codTotal : onlineTotal;
 
   const link = order ? upiLink({ amount: onlineTotal, note: order.note }) : "";
 
+  const addressBlock =
+    `• Name: ${form.name}\n• Phone: ${form.phone}\n• Email: ${form.email}\n` +
+    `• Address: ${form.address}\n  ${form.city}, ${form.state} - ${form.pincode}, India\n`;
+
   const onlineMsg =
     `Hi superb.choice! ✅ I've placed an order & paid online (UPI).\n` +
     `• Item: ${order?.title}\n• Qty: ${qty}\n• Amount paid: ${formatPrice(onlineTotal)}\n` +
-    `• Name: ${form.name}\n• Phone: ${form.phone}\n• Email: ${form.email}\n` +
-    `I'll share my delivery address here. Please confirm & ship. 🙏`;
+    addressBlock +
+    `Please confirm & ship. 🙏`;
 
   const codMsg =
     `Hi superb.choice! 🛵 I want to place a *Cash on Delivery* order.\n` +
     `• Item: ${order?.title}\n• Qty: ${qty}\n• Amount to pay on delivery: ${formatPrice(codTotal)}\n` +
-    `• Name: ${form.name}\n• Phone: ${form.phone}\n• Email: ${form.email}\n` +
-    `I'll share my delivery address here. Please confirm the order. 🙏`;
+    addressBlock +
+    `Please confirm the order. 🙏`;
 
   return (
     <AnimatePresence>
@@ -155,12 +181,39 @@ export default function Checkout({ order, onClose }) {
               <Truck size={16} /> Free Home Delivery across India
             </div>
 
-            {/* Details form */}
+            {/* Contact details */}
             <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-white/50">Your details</p>
             <div className="flex flex-col gap-3">
               <Field label="Full name" value={form.name} onChange={set("name")} error={touched && errors.name} placeholder="e.g. Aarav Sharma" autoComplete="name" />
               <Field label="Phone (WhatsApp)" value={form.phone} onChange={set("phone")} error={touched && errors.phone} placeholder="10-digit mobile number" inputMode="numeric" autoComplete="tel" />
               <Field label="Email" value={form.email} onChange={set("email")} error={touched && errors.email} placeholder="you@email.com" type="email" autoComplete="email" />
+            </div>
+
+            {/* Delivery address */}
+            <p className="mb-2 mt-5 text-xs font-semibold uppercase tracking-wider text-white/50">Delivery address</p>
+            <div className="flex flex-col gap-3">
+              <Field
+                textarea
+                label="House No, Building Name, Area, Colony"
+                value={form.address}
+                onChange={set("address")}
+                error={touched && errors.address}
+                placeholder="Flat 4B, Sunrise Residency, MG Road, Green Colony"
+                autoComplete="street-address"
+              />
+              <div className="grid grid-cols-2 gap-3">
+                <Field label="Pin Code" value={form.pincode} onChange={set("pincode")} error={touched && errors.pincode} placeholder="6-digit PIN" inputMode="numeric" autoComplete="postal-code" />
+                <Field label="City" value={form.city} onChange={set("city")} error={touched && errors.city} placeholder="e.g. Jaipur" autoComplete="address-level2" />
+              </div>
+              <SelectField
+                label="State"
+                value={form.state}
+                onChange={set("state")}
+                error={touched && errors.state}
+                options={INDIAN_STATES}
+                placeholder="Select your state"
+              />
+              <p className="text-[11px] text-white/40">Country: India 🇮🇳</p>
             </div>
 
             {method === "online" ? (
@@ -269,16 +322,45 @@ function MethodCard({ active, onClick, title, price, note, badge }) {
   );
 }
 
-function Field({ label, error, ...props }) {
+function Field({ label, error, textarea, ...props }) {
+  const cls = `w-full rounded-xl border bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-white/30 outline-none transition-colors focus:border-gold/60 ${
+    error ? "border-red-500/60" : "border-white/12"
+  }`;
   return (
     <label className="block">
       <span className="mb-1 block text-xs font-medium text-white/60">{label}</span>
-      <input
-        {...props}
-        className={`w-full rounded-xl border bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-white/30 outline-none transition-colors focus:border-gold/60 ${
-          error ? "border-red-500/60" : "border-white/12"
-        }`}
-      />
+      {textarea ? (
+        <textarea {...props} rows={2} className={`${cls} resize-none`} />
+      ) : (
+        <input {...props} className={cls} />
+      )}
+      {error && <span className="mt-1 block text-[11px] text-red-400">{error}</span>}
+    </label>
+  );
+}
+
+function SelectField({ label, error, options, placeholder, ...props }) {
+  return (
+    <label className="block">
+      <span className="mb-1 block text-xs font-medium text-white/60">{label}</span>
+      <div className="relative">
+        <select
+          {...props}
+          className={`w-full appearance-none rounded-xl border bg-white/[0.04] px-4 py-3 pr-10 text-sm outline-none transition-colors focus:border-gold/60 ${
+            error ? "border-red-500/60" : "border-white/12"
+          } ${props.value ? "text-white" : "text-white/30"}`}
+        >
+          <option value="" disabled className="bg-night-900 text-white/60">
+            {placeholder}
+          </option>
+          {options.map((o) => (
+            <option key={o} value={o} className="bg-night-900 text-white">
+              {o}
+            </option>
+          ))}
+        </select>
+        <ChevronDown size={16} className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white/40" />
+      </div>
       {error && <span className="mt-1 block text-[11px] text-red-400">{error}</span>}
     </label>
   );
