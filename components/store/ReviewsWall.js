@@ -3,15 +3,10 @@
 import { motion } from "framer-motion";
 import { Star, BadgeCheck } from "lucide-react";
 import Tilt3D from "@/components/experience/Tilt3D";
+import ProductPhoto from "@/components/store/ProductPhoto";
 import { reviews, trust } from "@/lib/product";
+import { designs } from "@/lib/designs";
 import { revealViewport } from "@/lib/utils";
-
-const PHOTO_BG = [
-  "radial-gradient(90% 80% at 70% 25%, rgba(255,211,105,0.5), transparent 60%), #17130f",
-  "radial-gradient(90% 80% at 30% 70%, rgba(122,91,255,0.4), transparent 60%), #12111c",
-  "radial-gradient(90% 80% at 50% 30%, rgba(255,120,140,0.42), transparent 60%), #1a1114",
-  "radial-gradient(90% 80% at 60% 40%, rgba(80,200,255,0.4), transparent 60%), #0f1418",
-];
 
 export default function ReviewsWall() {
   return (
@@ -36,14 +31,11 @@ export default function ReviewsWall() {
           </span>
         </div>
 
-        {/* Customer photo tiles */}
-        <div className="mb-4 grid grid-cols-4 gap-2">
-          {PHOTO_BG.concat(PHOTO_BG).slice(0, 4).map((bg, i) => (
-            <div key={i} className="relative flex aspect-square items-center justify-center overflow-hidden rounded-xl border border-white/10" style={{ background: bg }}>
-              <span
-                className="h-8 w-8 rounded-full"
-                style={{ background: "radial-gradient(circle at 34% 30%, #fff9ec, #ffe6ad 45%, #d99f3c 100%)", boxShadow: "0 0 14px rgba(255,211,105,0.55)" }}
-              />
+        {/* Real product shots */}
+        <div className="mb-6 grid grid-cols-3 gap-2">
+          {designs.map((d) => (
+            <div key={d.id} className="aspect-square">
+              <ProductPhoto src={d.image} alt={d.label} design={d.id} variant="thumb" feather />
             </div>
           ))}
         </div>

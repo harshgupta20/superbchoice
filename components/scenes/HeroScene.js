@@ -3,11 +3,11 @@
 import { motion } from "framer-motion";
 import { ChevronsDown, Sparkles, Star } from "lucide-react";
 import Scene from "@/components/experience/Scene";
-import CrystalBall from "@/components/experience/CrystalBall";
+import ProductPhoto from "@/components/store/ProductPhoto";
 import PulseCTA from "@/components/experience/PulseCTA";
 import { pricing } from "@/lib/config";
 import { formatPrice } from "@/lib/utils";
-import { sceneLines } from "@/lib/experience";
+import { getDesign } from "@/lib/designs";
 
 const ease = [0.22, 1, 0.36, 1];
 
@@ -24,15 +24,22 @@ export default function HeroScene() {
         <Sparkles size={13} /> Handcrafted Moon · superb.choice
       </motion.span>
 
-      {/* The hero moon — dominates the screen */}
+      {/* The hero product — dominates the screen */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.7 }}
+        initial={{ opacity: 0, scale: 0.85 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.2, ease }}
         className="flex flex-1 items-center justify-center"
       >
-        <div className="animate-float">
-          <CrystalBall design="moon" size={244} interactive fragments />
+        <div className="relative aspect-square w-[78vw] max-w-[330px] animate-float">
+          <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-3/4 w-3/4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/20 blur-2xl" />
+          <ProductPhoto
+            src={getDesign("moon").image}
+            alt="superb.choice Moon Crystal Ball Lamp"
+            design="moon"
+            variant="main"
+            feather
+          />
         </div>
       </motion.div>
 
@@ -98,8 +105,6 @@ export default function HeroScene() {
         <span className="text-[11px] uppercase tracking-[0.25em]">Swipe</span>
         <ChevronsDown size={18} />
       </motion.div>
-
-      <span className="sr-only">{sceneLines.hero}</span>
     </Scene>
   );
 }

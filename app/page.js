@@ -7,13 +7,7 @@ import PurchasePopup from "@/components/experience/PurchasePopup";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 import HeroScene from "@/components/scenes/HeroScene";
-import RoomScene from "@/components/scenes/RoomScene";
 import DesignsScene from "@/components/scenes/DesignsScene";
-import ReadingScene from "@/components/scenes/ReadingScene";
-import SetupScene from "@/components/scenes/SetupScene";
-import RomanceScene from "@/components/scenes/RomanceScene";
-import GiftScene from "@/components/scenes/GiftScene";
-import SocialScene from "@/components/scenes/SocialScene";
 
 import CheckoutProvider from "@/components/store/CheckoutProvider";
 import SelectionProvider from "@/components/store/SelectionProvider";
@@ -56,20 +50,11 @@ export default function HomePage() {
         {/* Atmosphere */}
         <SkyBackdrop />
         <Starfield />
-        <StoriesProgress segments={8} />
+        <StoriesProgress segments={4} />
 
         <main className="relative">
-          {/* The film — cinematic scenes */}
           <HeroScene />
-          <RoomScene />
           <DesignsScene />
-          <ReadingScene />
-          <SetupScene />
-          <RomanceScene />
-          <GiftScene />
-          <SocialScene />
-
-          {/* The store — single-product commerce */}
           <ProductBlock />
           <Benefits />
           <ReviewsWall />

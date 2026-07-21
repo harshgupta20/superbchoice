@@ -29,12 +29,11 @@ export default function ProductBlock() {
           Get Yours <span className="text-gradient-gold">Tonight</span>
         </h2>
 
-        {/* Product photo */}
-        <div className="relative rounded-[2rem] border border-white/10 bg-white/[0.03] p-4 shadow-card">
-          {/* warm glow behind the frame */}
-          <div className="pointer-events-none absolute left-1/2 top-1/2 -z-0 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/20 blur-2xl" />
-          <div className="relative mx-auto aspect-square w-full max-w-[300px] animate-float overflow-hidden rounded-[1.4rem] border border-white/10 bg-black/30">
-            <ProductPhoto src={design.image} alt={`Crystal Ball Lamp — ${design.label}`} design={designId} variant="main" />
+        {/* Product photo — blends into the scene, no box */}
+        <div className="relative flex items-center justify-center py-2">
+          <div className="pointer-events-none absolute left-1/2 top-1/2 -z-0 h-60 w-60 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/18 blur-2xl" />
+          <div className="relative aspect-square w-[80%] max-w-[320px] animate-float">
+            <ProductPhoto src={design.image} alt={`Crystal Ball Lamp — ${design.label}`} design={designId} variant="main" feather />
           </div>
         </div>
 
@@ -57,8 +56,8 @@ export default function ProductBlock() {
                     <Check size={12} strokeWidth={3} />
                   </span>
                 )}
-                <div className="pointer-events-none mb-1 h-16 w-full overflow-hidden rounded-xl">
-                  <ProductPhoto src={d.image} alt={d.label} design={d.id} variant="thumb" />
+                <div className="pointer-events-none mb-1 h-16 w-full">
+                  <ProductPhoto src={d.image} alt={d.label} design={d.id} variant="thumb" feather />
                 </div>
                 <span className="text-[13px] font-bold leading-tight text-white">{d.label}</span>
                 <span className="text-[10px] text-gold">{formatPrice(d.price)}</span>
